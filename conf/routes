@@ -1,0 +1,2 @@
+GET     /v1/health     com.thmlogwork.timezone.app.rest.HealthController.getHealth
+GET     /v1/timeForLatLng/:str   com.thmlogwork.timezone.app.rest.TimezoneController.getTimezoneInfo(str)
