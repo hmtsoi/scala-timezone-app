@@ -5,6 +5,7 @@ import com.thmlogwork.timezone.app.persistence.EntityNotFoundException
 import io.circe.generic.auto._
 import io.circe.syntax._
 import javax.inject._
+import play.api.Logger
 import play.api.mvc._
 
 import scala.concurrent.ExecutionContext
@@ -14,6 +15,8 @@ class TimezoneController @Inject()(
   cc: ControllerComponents
 )(implicit ec: ExecutionContext)
     extends AbstractController(cc) {
+
+  val logger = Logger(classOf[TimezoneController])
 
   def getTimezoneInfo(param: String) =
     Action.async { implicit request =>
@@ -25,7 +28,9 @@ class TimezoneController @Inject()(
           Ok(response.asJson.noSpaces)
         }
         .recover {
-          case e: EntityNotFoundException => NotFound(e.getMessage)
+          case e: EntityNotFoundException =>
+            logger.warn(s"No timezone info found for $latLng")
+            NotFound(e.getMessage)
         }
     }
 }

@@ -25,10 +25,5 @@ lazy val root = (project in file("."))
     organization := "com.thmlogwork",
     version := "1.0-SNAPSHOT",
     scalaVersion := "2.13.1",
-    scalacOptions ++= Seq(
-      "-feature",
-      "-deprecation",
-      "-Xfatal-warnings"
-    )
+    scalacOptions ++= Seq("-feature", "-deprecation", "-Xfatal-warnings")
   )
-
